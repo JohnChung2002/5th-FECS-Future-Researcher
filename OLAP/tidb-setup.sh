@@ -1,7 +1,7 @@
 #!/bin/bash
 sudo apt update
 sudo apt upgrade -y
-sudo apt install mysql-server sysbench -y
+sudo apt install mysql-server -y
 sudo service mysql stop
 bash_source=$(curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh | grep -Po '(?<=(Shell profile:  )).*$')
 bash_source=$(echo $bash_source | sed -r 's~\x01?(\x1B\(B)?\x1B\[([0-9;]*)?[JKmsu]\x02?~~g')
