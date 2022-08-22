@@ -11,7 +11,7 @@ until tiup status | grep -q "RUNNING";
 do 
   sleep 1; 
 done
-sleep 10;
+sleep 100;
 sudo mysql --host 127.0.0.1 --port 4000 -u root -e "SET PASSWORD='root';"
 sudo mysql --host 127.0.0.1 --port 4000 -u root -proot -e "CREATE DATABASE tpcds;"
 sudo mysql --host 127.0.0.1 --port 4000 -u root -proot -D tcpds < tpcds.sql
