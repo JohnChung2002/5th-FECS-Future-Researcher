@@ -11,5 +11,5 @@ until tiup status | grep -q "RUNNING";
 do 
   sleep 1; 
 done
-sudo mysql --host 127.0.0.1 --port 4000 -u root -p -e "SET PASSWORD='root';"
+sudo mysql --host 127.0.0.1 --port 4000 -u root -e "SET PASSWORD='root';"
 sudo mysql --host 127.0.0.1 --port 4000 -u root -proot -e "CREATE DATABASE sbtest;"
