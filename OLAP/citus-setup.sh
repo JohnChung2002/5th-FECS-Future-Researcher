@@ -7,3 +7,4 @@ sudo cp citus-addon.sh /var/lib/postgresql
 sudo su -c "./citus-addon.sh" postgres
 sudo -u postgres psql -p 9700 -c "CREATE DATABASE tpcds;"
 sudo -u postgres psql < tpcds.sql
+pip install psycopg2
