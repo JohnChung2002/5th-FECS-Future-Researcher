@@ -50,7 +50,7 @@ def write_results(name, results):
         for key in results:
             f.write(f"Time taken for {key} query: {time_lapsed(results[key])}\n")
 
-def test_monetdb(query_path):
+def test_monetdb():
     conn = pymonetdb.connect(
         username="monetdb",
         password="monetdb",
@@ -63,7 +63,7 @@ def test_monetdb(query_path):
     time_taken["ETL"] = etl_test(conn, cursor)
     time_lapsed(time_taken["ETL"])
     for i in range(1,100):
-        sql_file = f"{query_path}/query{i}.sql"
+        sql_file = f"queries/MonetDB/query{i}.sql"
         time_taken[f"{i}"] = exec_sql(cursor, sql_file)
         time_lapsed(time_taken[f"{i}"])
     return time_taken
@@ -76,5 +76,5 @@ if __name__ == "__main__":
     for key in option:
         print(f"{key}. {option[key]}")
     choice = int(input("Select an option: "))
-    results = test_monetdb(f"queries/MonetDB/{option[choice]}")
+    results = test_monetdb()
     write_results(option[choice], results)
