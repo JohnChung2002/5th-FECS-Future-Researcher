@@ -76,5 +76,5 @@ if __name__ == "__main__":
     for key in option:
         print(f"{key}. {option[key]}")
     choice = int(input("Select an option: "))
-    results = test_monetdb(f"queries/Default/{option[choice]}")
+    results = test_monetdb(f"queries/MonetDB/{option[choice]}")
     write_results(option[choice], results)
