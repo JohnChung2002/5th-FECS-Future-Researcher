@@ -66,8 +66,6 @@ def test_postgresql():
         time_lapsed(time_taken[f"{i}"])
     return time_taken
 
-
-
 if __name__ == "__main__":
     option = {1 : "30GB", 2 : "100GB"}
     print("---Postgresql TPC-DS Test---")
