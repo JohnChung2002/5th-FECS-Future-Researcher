@@ -10,4 +10,4 @@ sudo -u postgres psql -c "ALTER USER postgres with password 'postgres';"
 sudo -u postgres psql -c "CREATE DATABASE tpcds;"
 sudo service postgresql restart
 sudo -u postgres psql < tpcds.sql
-pip install psycopg2
+pip install psycopg2 regex
