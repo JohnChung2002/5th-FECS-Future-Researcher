@@ -37,6 +37,7 @@ def etl_test(conn, cursor):
     start_time = time.time()
     for table in TABLES:
         os.system(f"sed -i 's/|$//' {table}.dat")
+        print(f"[Info] Inserting {table}")
         cursor.execute(f"COPY {table} FROM '/tmp/{table}.dat' DELIMITER '|';")
     conn.commit()
     end_time = time.time()

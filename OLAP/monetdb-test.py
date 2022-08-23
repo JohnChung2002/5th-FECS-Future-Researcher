@@ -40,6 +40,7 @@ def etl_test(conn, cursor):
     conn.set_downloader(transfer_handler)
     start_time = time.time()
     for table in TABLES:
+        print(f"[Info] Inserting {table}")
         cursor.execute(f"COPY INTO {table} FROM '/tmp/{table}.dat' ON CLIENT USING DELIMITERS '|', E'\n', '\"' NULL AS '';")
     conn.commit()
     end_time = time.time()

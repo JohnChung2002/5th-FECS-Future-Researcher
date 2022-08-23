@@ -37,6 +37,7 @@ def etl_test(conn, cursor):
     start_time = time.time()
     for table in TABLES:
         os.system(f"sed 's/^|/0|/g;s/||/|0|/g;s/|$/|0/g' -i /var/lib/mysql-files/{table}.dat")
+        print(f"[Info] Inserting {table}")
         cursor.execute(f"LOAD DATA INFILE '/var/lib/mysql-files/{table}.dat' INTO TABLE {table} COLUMNS TERMINATED BY '|' LINES TERMINATED BY '\n';")
     conn.commit()
     end_time = time.time()

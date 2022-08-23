@@ -6,7 +6,7 @@ sudo service mysql stop
 bash_source=$(curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh | grep -Po '(?<=(Shell profile:  )).*$')
 bash_source=$(echo $bash_source | sed -r 's~\x01?(\x1B\(B)?\x1B\[([0-9;]*)?[JKmsu]\x02?~~g')
 source $bash_source
-tiup playground v6.1.0 --db 1 --pd 1 --kv 1 --tiflash 1 --without-monitor > /dev/null 2>&1 & disown
+tiup playground v6.1.0 --db 1 --pd 1 --kv 1 --tiflash 1 --without-monitor --db.config config.toml > /dev/null 2>&1 & disown
 until tiup status | grep -q "RUNNING";
 do 
   sleep 1; 

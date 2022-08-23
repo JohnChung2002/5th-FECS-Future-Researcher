@@ -69,6 +69,7 @@ def test_postgresql():
     start_time = time.time()
     for table in TABLES:
         os.system(f"sed -i 's/|$//' {table}.dat")
+        print(f"[Info] Inserting {table}")
         pcursor.execute(f"COPY {table} FROM '/tmp/{table}.dat' DELIMITER '|';")
     postgresql_conn.commit()
     end_time = time.time()
