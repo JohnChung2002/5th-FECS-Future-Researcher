@@ -3,8 +3,29 @@ import time
 import pymonetdb
 import psycopg2
 import os
+import regex as re
 
 TABLES = ["dbgen_version", "customer_address", "customer_demographics", "date_dim", "warehouse", "ship_mode", "time_dim", "reason", "income_band", "item", "store", "call_center", "customer", "web_site", "store_returns", "household_demographics", "web_page", "promotion", "catalog_page", "inventory", "catalog_returns", "web_returns", "web_sales", "catalog_sales", "store_sales"]
+
+def exec_sql(cursor, sql_file):
+    print(f"\n[INFO] Executing SQL script file: {sql_file}")
+    statement = ""
+    for line in open(sql_file):
+        if re.match(r'--', line):  # ignore sql comment lines
+            continue
+        if not re.search(r';$', line):  # keep appending lines that don't end in ';'
+            statement = statement + line
+        else:  # when you get a line ending in ';' then exec statement and reset for next statement
+            statement = statement + line
+            #print "\n\n[DEBUG] Executing SQL statement:\n%s" % (statement)
+            try:
+                start_time = time.time()
+                cursor.execute(statement)
+                end_time = time.time()
+                return (end_time - start_time)
+            except (mysql.connector.errors.OperationalError, mysql.connector.errors.ProgrammingError) as e:
+                print(f"\n[WARN] MySQLError during execute statement \n\tArgs: {str(e.args)}")
+            statement = ""
 
 def time_lapsed(sec):
     mins = sec // 60
@@ -70,6 +91,11 @@ def test_monetdb():
     monetdb_conn.commit()
     end_time = time.time()
     time_taken["ETL"] = end_time - start_time
+    time_lapsed(time_taken["ETL"])
+    for i in range(1,100):
+        sql_file = f"queries/Default/query{i}.sql"
+        time_taken[f"{i}"] = exec_sql(mcursor, sql_file)
+        time_lapsed(time_taken[f"{i}"])
     return
 
 def test_tidb():
