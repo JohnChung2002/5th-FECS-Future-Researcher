@@ -47,7 +47,7 @@ def write_results(name, results):
         for key in results:
             f.write(f"Time taken for {key} query: {time_lapsed(results[key])}\n")
 
-def test_mysql(query_path):
+def test_tidb():
     conn = mysql.connector.connect(
         host="127.0.0.1",
         user="root",
@@ -60,7 +60,7 @@ def test_mysql(query_path):
     time_taken["ETL"] = etl_test(conn, cursor)
     time_lapsed(time_taken["ETL"])
     for i in range(1,100):
-        sql_file = f"{query_path}/query{i}.sql"
+        sql_file = f"queries/MySQL/query{i}.sql"
         time_taken[f"{i}"] = exec_sql(cursor, sql_file)
         time_lapsed(time_taken[f"{i}"])
     return time_taken
@@ -73,5 +73,8 @@ if __name__ == "__main__":
     for key in option:
         print(f"{key}. {option[key]}")
     choice = int(input("Select an option: "))
-    results = test_mysql(f"queries/MySQL/{option[choice]}")
-    write_results(option[choice], results)
+    if choice in option.keys():
+        results = test_tidb()
+        write_results(option[choice], results)
+    else:
+        print("Invalid selection. Exiting...")

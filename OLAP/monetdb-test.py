@@ -68,13 +68,14 @@ def test_monetdb():
         time_lapsed(time_taken[f"{i}"])
     return time_taken
 
-
-
 if __name__ == "__main__":
     option = {1 : "30GB", 2 : "100GB"}
     print("---MonetDB TPC-DS Test---")
     for key in option:
         print(f"{key}. {option[key]}")
     choice = int(input("Select an option: "))
-    results = test_monetdb()
-    write_results(option[choice], results)
+    if choice in option.keys():
+        results = test_monetdb()
+        write_results(option[choice], results)
+    else:
+        print("Invalid selection. Exiting...")

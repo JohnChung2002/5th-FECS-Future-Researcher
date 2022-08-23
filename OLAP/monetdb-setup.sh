@@ -13,3 +13,4 @@ echo "user=monetdb\npassword=monetdb" > /var/lib/monetdb/.monetdb
 export DOTMONETDBFILE="/var/lib/monetdb/.monetdb"
 mclient -d tpcds < tpcds.sql
 pip install pymonetdb regex
+./prepare-data-gen.sh

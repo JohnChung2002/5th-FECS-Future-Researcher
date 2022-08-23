@@ -11,3 +11,4 @@ sudo -u postgres psql -c "CREATE DATABASE tpcds;"
 sudo service postgresql restart
 sudo -u postgres psql < tpcds.sql
 pip install psycopg2 regex
+./prepare-data-gen.sh
