@@ -1,5 +1,5 @@
 -- start query 14 in stream 0 using template query14.tpl
-with  cross_items as
+with cross_items as
  (select i_item_sk ss_item_sk
  from item,
  (select iss.i_brand_id brand_id
