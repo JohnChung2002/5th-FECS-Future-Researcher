@@ -9,4 +9,7 @@ monetdbd create ~/tpcds
 monetdbd start ~/tpcds
 monetdb create tpcds
 monetdb start tpcds
+echo "user=monetdb\npassword=monetdb" > /var/lib/monetdb/.monetdb
+export DOTMONETDBFILE="/var/lib/monetdb/.monetdb"
+mclient -d tpcds < tpcds.sql
 pip install pymonetdb regex

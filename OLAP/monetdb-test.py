@@ -33,7 +33,11 @@ def time_lapsed(sec):
     print("Time Lapsed H:M:S={0}:{1}:{2}".format(int(hours),int(mins),sec))
 
 def etl_test(conn, cursor):
-    #Load data (ETL) 
+    print("\n[INFO] Starting to load data into database")
+    #Load data (ETL)
+    transfer_handler = pymonetdb.SafeDirectoryHandler("/tmp")
+    conn.set_uploader(transfer_handler)
+    conn.set_downloader(transfer_handler)
     start_time = time.time()
     for table in TABLES:
         cursor.execute(f"COPY INTO {table} FROM '/tmp/{table}.dat' ON CLIENT USING DELIMITERS '|', E'\n', '\"' NULL AS '';")
