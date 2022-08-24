@@ -35,8 +35,8 @@ def time_convert(sec):
 def etl_test(conn, cursor):
     #Load data (ETL) 
     start_time = time.time()
+    os.system("./mysql-preprocess.sh")
     for table in TABLES:
-        os.system(f"sed 's/^|/0|/g;s/||/|0|/g;s/|$/|0/g' -i /var/lib/mysql-files/{table}.dat")
         print(f"[Info] Inserting {table}")
         os.system(f"sudo mysql --host 127.0.0.1 --port 4000 -u root -proot -D tpcds --local-infile=1 -e \"LOAD DATA LOCAL INFILE '/var/lib/mysql-files/{table}.dat' INTO TABLE {table} COLUMNS TERMINATED BY '|' LINES TERMINATED BY '\n';\"")
     end_time = time.time()
