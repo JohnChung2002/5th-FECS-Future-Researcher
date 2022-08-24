@@ -25,12 +25,12 @@ def exec_sql(cursor, sql_file):
                 print(f"\n[WARN] Postgresql Error during execute statement \n\tArgs: {str(e.args)}")
             statement = ""
 
-def time_lapsed(sec):
+def time_convert(sec):
     mins = sec // 60
     sec = sec % 60
     hours = mins //60
     mins = mins % 60
-    print("Time Lapsed H:M:S={0}:{1}:{2}".format(int(hours),int(mins),sec))
+    return ("{0}:{1}:{2}".format(int(hours),int(mins),sec))
 
 def etl_test(conn, cursor):
     #Load data (ETL) 
@@ -46,7 +46,7 @@ def etl_test(conn, cursor):
 def write_results(name, results):
     with open(f"Postgresql_{name}.txt", "w") as f:
         for key in results:
-            f.write(f"Time taken for {key} query: {time_lapsed(results[key])}\n")
+            f.write(f"Time taken for {key} query: {time_convert(results[key])}\n")
 
 def test_postgresql():
     conn = psycopg2.connect(
@@ -59,11 +59,11 @@ def test_postgresql():
     time_taken = {}
     cursor = conn.cursor()
     time_taken["ETL"] = etl_test(conn, cursor)
-    time_lapsed(time_taken["ETL"])
+    print(f"Time Lapsed H:M:S={time_convert(time_taken['ETL'])}")
     for i in range(1,100):
         sql_file = f"queries/Netezza/query{i}.sql"
         time_taken[f"{i}"] = exec_sql(cursor, sql_file)
-        time_lapsed(time_taken[f"{i}"])
+        print(f"Time Lapsed H:M:S={time_convert(time_taken[f'{i}'])}")
     return time_taken
 
 if __name__ == "__main__":
