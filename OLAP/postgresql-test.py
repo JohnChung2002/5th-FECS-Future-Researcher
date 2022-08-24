@@ -35,7 +35,6 @@ def time_convert(sec):
 def etl_test(conn, cursor):
     #Load data (ETL) 
     start_time = time.time()
-    os.system(f"./postgresql-preprocess.sh")
     for table in TABLES:
         print(f"[Info] Inserting {table}")
         cursor.execute(f"COPY {table} FROM '/tmp/{table}.dat' DELIMITER '|';")
