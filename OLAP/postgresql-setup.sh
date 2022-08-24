@@ -9,6 +9,6 @@ pg_createcluster 14 main --start
 sudo -u postgres psql -c "ALTER USER postgres with password 'postgres';"
 sudo -u postgres psql -c "CREATE DATABASE tpcds;"
 sudo service postgresql restart
-sudo -u postgres psql < tpcds.sql
+sudo -u postgres psql -d tpcds < tpcds.sql
 pip install psycopg2 regex
 ./prepare-data-gen.sh

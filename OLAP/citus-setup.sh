@@ -6,6 +6,6 @@ cp postgresql.conf.sample /usr/share/postgresql/14/postgresql.conf.sample
 sudo cp citus-addon.sh /var/lib/postgresql
 sudo su -c "./citus-addon.sh" postgres
 sudo -u postgres psql -p 9700 -c "CREATE DATABASE tpcds;"
-sudo -u postgres psql < tpcds.sql
+sudo -u postgres psql -p 9700 -d tpcds < tpcds.sql
 pip install psycopg2 regex
 ./prepare-data-gen.sh
