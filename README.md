@@ -3,4 +3,4 @@ This is the resources used in the benchmark conducted for the "Recent advances a
 
 Sysbench (https://github.com/akopytov/sysbench) was used to conduct OLTP benchmarking, while TPC-DS kit (https://github.com/gregrahn/tpcds-kit) was used to generate OLAP benchmarking data and queries.
 
-The benchmark results obtained are derived from the TPC-C and TPC-DS benchmarks and do not comply with the TPC-C and TPC-DS Specification
+Disclaimer: The benchmark results obtained are derived from the TPC-C and TPC-DS benchmarks and do not comply with the TPC-C and TPC-DS Specification
