@@ -4,6 +4,7 @@ for s_f in `ls *dat`
 do
     echo "[Processing] $s_f"
     sed 's/^|/\\N|/g;s/||/|\\N|/g;s/|$/|\\N/g' -i $s_f
+    sed 's/^|/\\N|/g;s/||/|\\N|/g;s/|$/|\\N/g' -i $s_f
 done
 for s_f in item.dat store.dat web_page.dat web_site.dat call_center.dat
 do
