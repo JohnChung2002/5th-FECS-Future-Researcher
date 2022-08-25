@@ -7,4 +7,3 @@ sudo mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_passwo
 sudo mysql -u root -proot -e "CREATE DATABASE tpcds;"
 sudo mysql -u root -proot -D tpcds < tpcds.sql
 pip install mysql-connector-python regex
-./prepare-data-gen.sh

@@ -37,23 +37,23 @@ def etl_test(conn, cursor):
     start_time = time.time()
     for table in TABLES:
         print(f"[Info] Inserting {table}")
-        cursor.execute(f"\\COPY {table} FROM '/tmp/{table}.dat' WITH DELIMITER AS '|' NULL AS '';")
+        os.system(f"sudo -u postgres psql -d tpcds -c \"\COPY {table} FROM '/tmp/{table}.dat' WITH DELIMITER AS '|' NULL AS '';\"")
     conn.commit()
     end_time = time.time()
     return (end_time - start_time)
 
 def write_results(name, results):
-    with open(f"Postgresql_{name}.txt", "w") as f:
+    with open(f"Citus_{name}.txt", "w") as f:
         for key in results:
             f.write(f"Time taken for {key} query: {time_convert(results[key])}\n")
 
-def test_postgresql():
+def test_citus():
     conn = psycopg2.connect(
         database="tpcds",
         host="127.0.0.1",
         user="postgres",
         password="postgres",
-        port="5432"
+        port="9700"
     )
     time_taken = {}
     cursor = conn.cursor()
@@ -67,12 +67,12 @@ def test_postgresql():
 
 if __name__ == "__main__":
     option = {1 : "30GB", 2 : "100GB"}
-    print("---Postgresql TPC-DS Test---")
+    print("---Citus TPC-DS Test---")
     for key in option:
         print(f"{key}. {option[key]}")
     choice = int(input("Select an option: "))
     if choice in option.keys():
-        results = test_postgresql()
+        results = test_citus()
         write_results(option[choice], results)
     else:
         print("Invalid selection. Exiting...")
