@@ -6,7 +6,7 @@ import regex as re
 TABLES = ["dbgen_version", "customer_address", "customer_demographics", "date_dim", "warehouse", "ship_mode", "time_dim", "reason", "income_band", "item", "store", "call_center", "customer", "web_site", "store_returns", "household_demographics", "web_page", "promotion", "catalog_page", "inventory", "catalog_returns", "web_returns", "web_sales", "catalog_sales", "store_sales"]
 
 def exec_sql(cursor, sql_file):
-    print(f"\n[INFO] Executing SQL script file: {sql_file}")
+    
     statement = ""
     for line in open(sql_file):
         if re.match(r'--', line):  # ignore sql comment lines
@@ -18,7 +18,9 @@ def exec_sql(cursor, sql_file):
             #print "\n\n[DEBUG] Executing SQL statement:\n%s" % (statement)
             try:
                 start_time = time.time()
+                print(f"\n[INFO] Executing SQL script file: {sql_file}")
                 cursor.execute(statement)
+                cursor.fetchall()
                 end_time = time.time()
                 return (end_time - start_time)
             except mysql.connector.errors as e:
