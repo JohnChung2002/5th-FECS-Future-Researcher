@@ -11,4 +11,3 @@ sudo -u postgres psql -c "ALTER USER postgres with password 'postgres';"
 sudo -u postgres psql -c "CREATE DATABASE tpcds;"
 sudo -u postgres psql -d tpcds < tpcds.sql
 pip install psycopg2 regex
-./prepare-data-gen.sh
