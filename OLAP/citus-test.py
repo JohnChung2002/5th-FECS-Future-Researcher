@@ -66,7 +66,7 @@ def test_citus():
     return time_taken
 
 if __name__ == "__main__":
-    option = {1 : "30GB", 2 : "100GB"}
+    option = {1 : "10GB", 2 : "30GB", 3 : "100GB"}
     print("---Citus TPC-DS Test---")
     for key in option:
         print(f"{key}. {option[key]}")

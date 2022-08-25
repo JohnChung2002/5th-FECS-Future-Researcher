@@ -43,17 +43,17 @@ def etl_test(conn, cursor):
     return (end_time - start_time)
 
 def write_results(name, results):
-    with open(f"Citus_{name}.txt", "w") as f:
+    with open(f"Postgresql_{name}.txt", "w") as f:
         for key in results:
             f.write(f"Time taken for {key} query: {time_convert(results[key])}\n")
 
-def test_citus():
+def test_postgresql():
     conn = psycopg2.connect(
         database="tpcds",
         host="127.0.0.1",
         user="postgres",
         password="postgres",
-        port="9700"
+        port="5432"
     )
     time_taken = {}
     cursor = conn.cursor()
@@ -66,13 +66,13 @@ def test_citus():
     return time_taken
 
 if __name__ == "__main__":
-    option = {1 : "30GB", 2 : "100GB"}
-    print("---Citus TPC-DS Test---")
+    option = {1 : "10GB", 2 : "30GB", 3 : "100GB"}
+    print("---Postgresql TPC-DS Test---")
     for key in option:
         print(f"{key}. {option[key]}")
     choice = int(input("Select an option: "))
     if choice in option.keys():
-        results = test_citus()
+        results = test_postgresql()
         write_results(option[choice], results)
     else:
         print("Invalid selection. Exiting...")
