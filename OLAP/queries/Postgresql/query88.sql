@@ -1,5 +1,3 @@
-set optimizer = on;
-set statement_mem = 16777216;
 select  *
 from
  (select count(*) h8_30_to_9

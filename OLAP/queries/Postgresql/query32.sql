@@ -1,5 +1,3 @@
-set optimizer = on;
-set statement_mem = 16777216;
 select  sum(cs_ext_discount_amt)  as "excess discount amount" 
 from 
    catalog_sales 

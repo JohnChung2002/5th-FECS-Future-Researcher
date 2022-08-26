@@ -1,5 +1,3 @@
-set optimizer = on;
-set statement_mem = 16777216;
 with ssales as
 (select c_last_name
       ,c_first_name

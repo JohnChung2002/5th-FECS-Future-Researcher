@@ -1,5 +1,3 @@
-set optimizer = on;
-set statement_mem = 16777216;
 with wss as 
  (select d_week_seq,
         ss_store_sk,

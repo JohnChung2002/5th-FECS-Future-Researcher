@@ -1,5 +1,3 @@
-set optimizer = on;
-set statement_mem = 16777216;
 select  c_customer_id as customer_id
        , coalesce(c_last_name,'') || ', ' || coalesce(c_first_name,'') as customername
  from customer

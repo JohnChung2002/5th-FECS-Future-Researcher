@@ -1,5 +1,3 @@
-set optimizer = on;
-set statement_mem = 16777216;
 select case when (select count(*) 
                   from store_sales 
                   where ss_quantity between 1 and 20) > 409437

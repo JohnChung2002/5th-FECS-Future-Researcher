@@ -1,5 +1,3 @@
-set optimizer = on;
-set statement_mem = 16777216;
 select  *
 from (select avg(ss_list_price) B1_LP
             ,count(ss_list_price) B1_CNT

@@ -38,8 +38,7 @@ def etl_test(conn, cursor):
     for table in TABLES:
         print(f"[Info] Inserting {table}")
         os.system(f"sudo -u postgres psql -p 9700 -d tpcds -c \"\COPY {table} FROM '/tmp/{table}.dat' WITH DELIMITER AS '|' NULL AS '';\"")
-    cursor.execute("VACUUM VERBOSE ANALYZE;")
-    conn.commit()
+    os.system(f"sudo -u postgres psql -p 9700 -d tpcds -c 'VACUUM VERBOSE ANALYZE;'")
     end_time = time.time()
     return (end_time - start_time)
 

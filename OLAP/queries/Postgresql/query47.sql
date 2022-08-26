@@ -1,5 +1,3 @@
-set optimizer = on;
-set statement_mem = 16777216;
 with v1 as(
  select i_category, i_brand,
         s_store_name, s_company_name,

@@ -1,5 +1,3 @@
-set optimizer = on;
-set statement_mem = 16777216;
 with customer_total_return as
  (select wr_returning_customer_sk as ctr_customer_sk
         ,ca_state as ctr_state, 

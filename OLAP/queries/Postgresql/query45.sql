@@ -1,5 +1,3 @@
-set optimizer = on;
-set statement_mem = 16777216;
 select  ca_zip, ca_county, sum(ws_sales_price)
  from web_sales, customer, customer_address, date_dim, item
  where ws_bill_customer_sk = c_customer_sk

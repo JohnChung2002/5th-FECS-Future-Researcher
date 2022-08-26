@@ -1,5 +1,3 @@
-set optimizer = on;
-set statement_mem = 16777216;
 with wscs as
  (select sold_date_sk
         ,sales_price

@@ -1,5 +1,3 @@
-set optimizer = on;
-set statement_mem = 16777216;
 select  
     sum(ss_net_profit)/sum(ss_ext_sales_price) as gross_margin
    ,i_category

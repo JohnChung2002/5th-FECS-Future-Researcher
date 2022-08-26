@@ -1,5 +1,3 @@
-set optimizer = on;
-set statement_mem = 16777216;
 select   
          w_warehouse_name
      ,w_warehouse_sq_ft

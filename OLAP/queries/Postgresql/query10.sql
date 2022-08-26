@@ -1,5 +1,3 @@
-set optimizer = on;
-set statement_mem = 16777216;
 select  
   cd_gender,
   cd_marital_status,

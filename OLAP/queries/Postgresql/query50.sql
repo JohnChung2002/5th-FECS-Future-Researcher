@@ -1,5 +1,3 @@
-set optimizer = on;
-set statement_mem = 16777216;
 select  
    s_store_name
   ,s_company_id

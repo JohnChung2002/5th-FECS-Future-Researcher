@@ -1,5 +1,3 @@
-set optimizer = on;
-set statement_mem = 16777216;
 select  *
  from(select w_warehouse_name
             ,i_item_id

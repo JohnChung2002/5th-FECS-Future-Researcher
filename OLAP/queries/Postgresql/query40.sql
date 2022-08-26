@@ -1,5 +1,3 @@
-set optimizer = on;
-set statement_mem = 16777216;
 select  
    w_state
   ,i_item_id

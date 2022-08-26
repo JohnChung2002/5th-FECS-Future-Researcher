@@ -1,5 +1,3 @@
-set optimizer = on;
-set statement_mem = 16777216;
 select  i_brand_id brand_id, i_brand brand,
      sum(ss_ext_sales_price) ext_price
  from date_dim, store_sales, item

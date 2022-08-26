@@ -1,5 +1,3 @@
-set optimizer = on;
-set statement_mem = 16777216;
 with sr_items as
  (select i_item_id item_id,
         sum(sr_return_quantity) sr_item_qty

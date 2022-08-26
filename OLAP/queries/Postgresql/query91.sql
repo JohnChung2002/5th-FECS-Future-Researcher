@@ -1,5 +1,3 @@
-set optimizer = on;
-set statement_mem = 16777216;
 select  
         cc_call_center_id Call_Center,
         cc_name Call_Center_Name,

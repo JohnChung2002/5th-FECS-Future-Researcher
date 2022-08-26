@@ -1,5 +1,3 @@
-set optimizer = on;
-set statement_mem = 16777216;
 select  count(*) from (
     select distinct c_last_name, c_first_name, d_date
     from store_sales, date_dim, customer

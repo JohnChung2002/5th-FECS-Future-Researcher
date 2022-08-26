@@ -1,5 +1,3 @@
-set optimizer = on;
-set statement_mem = 16777216;
 WITH all_sales AS (
  SELECT d_year
        ,i_brand_id
