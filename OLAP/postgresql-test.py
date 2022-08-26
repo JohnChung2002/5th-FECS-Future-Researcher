@@ -60,7 +60,7 @@ def test_postgresql():
     time_taken["ETL"] = etl_test(conn, cursor)
     print(f"Time Lapsed H:M:S={time_convert(time_taken['ETL'])}")
     for i in range(1,100):
-        sql_file = f"queries/Netezza/query{i}.sql"
+        sql_file = f"queries/Postgresql/query{i}.sql"
         time_taken[f"{i}"] = exec_sql(cursor, sql_file)
         print(f"Time Lapsed H:M:S={time_convert(time_taken[f'{i}'])}")
     return time_taken
