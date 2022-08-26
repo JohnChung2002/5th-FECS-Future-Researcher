@@ -14,5 +14,7 @@ done
 sleep 100;
 sudo mysql --host 127.0.0.1 --port 4000 -u root -e "SET PASSWORD='root';"
 sudo mysql --host 127.0.0.1 --port 4000 -u root -proot -e "CREATE DATABASE tpcds;"
+sudo mysql --host 127.0.0.1 --port 4000 -u root -proot -e "update mysql.tidb set variable_value='180m' where variable_name='tikv_gc_life_time';"
+sudo mysql --host 127.0.0.1 --port 4000 -u root -proot -e "SET tidb_mem_quota_query = 32 << 30;"
 sudo mysql --host 127.0.0.1 --port 4000 -u root -proot -D tpcds < tpcds.sql
 pip install mysql-connector-python regex
