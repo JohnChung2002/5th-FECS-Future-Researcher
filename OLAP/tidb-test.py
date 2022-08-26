@@ -22,8 +22,8 @@ def exec_sql(cursor, sql_file):
                 cursor.fetchall()
                 end_time = time.time()
                 return (end_time - start_time)
-            except mysql.connector.errors as e:
-                print(f"\n[WARN] TiDB Error during execute statement \n\tArgs: {str(e.args)}")
+            except mysql.connector.Error as e:
+                print(f"\n[WARN] TiDB Error during execute statement \n\tArgs: {str(e)}")
                 return 0
 
 def time_convert(sec):
