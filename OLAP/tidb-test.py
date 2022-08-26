@@ -24,7 +24,7 @@ def exec_sql(cursor, sql_file):
                 return (end_time - start_time)
             except mysql.connector.errors as e:
                 print(f"\n[WARN] TiDB Error during execute statement \n\tArgs: {str(e.args)}")
-            statement = ""
+                return 0
 
 def time_convert(sec):
     mins = sec // 60
@@ -40,6 +40,8 @@ def etl_test(conn, cursor):
     for table in TABLES:
         print(f"[Info] Inserting {table}")
         os.system(f"sudo mysql --host 127.0.0.1 --port 4000 -u root -proot -D tpcds --local-infile=1 -e \"LOAD DATA LOCAL INFILE '/var/lib/mysql-files/{table}.dat' INTO TABLE {table} COLUMNS TERMINATED BY '|' LINES TERMINATED BY '\n';\"")
+        cursor.execute(f"ALTER TABLE {table} SET TIFLASH REPLICA 1;")
+        cursor.commit()
     end_time = time.time()
     return (end_time - start_time)
 
