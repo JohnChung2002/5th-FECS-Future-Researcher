@@ -1,3 +1,5 @@
+set optimizer = on;
+set statement_mem = 16777216;
 select  
    sum(ws_ext_discount_amt)  as "Excess Discount Amount" 
 from 

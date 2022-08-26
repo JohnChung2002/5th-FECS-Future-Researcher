@@ -1,3 +1,5 @@
+set optimizer = on;
+set statement_mem = 16777216;
 select  a.ca_state state, count(*) cnt
  from customer_address a
      ,customer c

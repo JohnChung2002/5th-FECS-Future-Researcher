@@ -1,3 +1,5 @@
+set optimizer = on;
+set statement_mem = 16777216;
 select  
     sum(ss_net_profit) as total_sum
    ,s_state

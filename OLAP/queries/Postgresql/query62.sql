@@ -1,3 +1,5 @@
+set optimizer = on;
+set statement_mem = 16777216;
 select  
    substr(w_warehouse_name,1,20)
   ,sm_type

@@ -1,3 +1,5 @@
+set optimizer = on;
+set statement_mem = 16777216;
 select  i_item_id, 
         avg(cs_quantity) agg1,
         avg(cs_list_price) agg2,

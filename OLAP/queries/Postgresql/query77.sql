@@ -1,3 +1,5 @@
+set optimizer = on;
+set statement_mem = 16777216;
 with ss as
  (select s_store_sk,
          sum(ss_ext_sales_price) as sales,

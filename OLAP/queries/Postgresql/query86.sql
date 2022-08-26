@@ -1,3 +1,5 @@
+set optimizer = on;
+set statement_mem = 16777216;
 select   
     sum(ws_net_paid) as total_sum
    ,i_category

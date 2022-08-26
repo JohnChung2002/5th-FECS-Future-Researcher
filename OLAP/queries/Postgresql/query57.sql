@@ -1,3 +1,5 @@
+set optimizer = on;
+set statement_mem = 16777216;
 with v1 as(
  select i_category, i_brand,
         cc_name,

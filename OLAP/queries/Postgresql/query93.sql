@@ -1,3 +1,5 @@
+set optimizer = on;
+set statement_mem = 16777216;
 select  ss_customer_sk
             ,sum(act_sales) sumsales
       from (select ss_item_sk

@@ -1,3 +1,5 @@
+set optimizer = on;
+set statement_mem = 16777216;
 select   
      i_item_id
     ,i_item_desc

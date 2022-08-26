@@ -1,3 +1,5 @@
+set optimizer = on;
+set statement_mem = 16777216;
 select  dt.d_year
      ,item.i_category_id
      ,item.i_category

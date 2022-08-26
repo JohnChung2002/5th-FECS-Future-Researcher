@@ -1,3 +1,5 @@
+set optimizer = on;
+set statement_mem = 16777216;
 WITH web_v1 as (
 select
   ws_item_sk item_sk, d_date,

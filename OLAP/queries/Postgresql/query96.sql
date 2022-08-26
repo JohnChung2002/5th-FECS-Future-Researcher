@@ -1,3 +1,5 @@
+set optimizer = on;
+set statement_mem = 16777216;
 select  count(*) 
 from store_sales
     ,household_demographics 

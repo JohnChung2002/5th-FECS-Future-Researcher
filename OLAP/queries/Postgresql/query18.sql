@@ -1,3 +1,5 @@
+set optimizer = on;
+set statement_mem = 16777216;
 select  i_item_id,
         ca_country,
         ca_state, 

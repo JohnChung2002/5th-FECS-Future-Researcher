@@ -1,3 +1,5 @@
+set optimizer = on;
+set statement_mem = 16777216;
 select  
    count(distinct ws_order_number) as "order count"
   ,sum(ws_ext_ship_cost) as "total shipping cost"

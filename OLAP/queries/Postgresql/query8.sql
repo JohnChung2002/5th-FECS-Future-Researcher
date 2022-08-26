@@ -1,3 +1,5 @@
+set optimizer = on;
+set statement_mem = 16777216;
 select  s_store_name
       ,sum(ss_net_profit)
  from store_sales
