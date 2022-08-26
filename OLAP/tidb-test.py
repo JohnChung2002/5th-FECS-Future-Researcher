@@ -41,7 +41,7 @@ def etl_test(conn, cursor):
         print(f"[Info] Inserting {table}")
         os.system(f"sudo mysql --host 127.0.0.1 --port 4000 -u root -proot -D tpcds --local-infile=1 -e \"LOAD DATA LOCAL INFILE '/var/lib/mysql-files/{table}.dat' INTO TABLE {table} COLUMNS TERMINATED BY '|' LINES TERMINATED BY '\n';\"")
         cursor.execute(f"ALTER TABLE {table} SET TIFLASH REPLICA 1;")
-        cursor.commit()
+        conn.commit()
     end_time = time.time()
     return (end_time - start_time)
 
