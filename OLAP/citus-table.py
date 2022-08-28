@@ -1,6 +1,7 @@
 import psycopg2
+import os
 
-def exec_sql(cursor, sql_file):
+def exec_sql(sql_file):
     statement = ""
     for line in open(sql_file):
         if re.match(r'--', line):  # ignore sql comment lines
@@ -11,17 +12,9 @@ def exec_sql(cursor, sql_file):
             statement = statement + line
             #print "\n\n[DEBUG] Executing SQL statement:\n%s" % (statement)
             try:
-                cursor.execute(statement)
-            except psycopg2.errors as e:
+                os.system(f"sudo -u postgres psql -p 9700 -c \"{statement}\"")
+            except psycopg2.Error as e:
                 print(f"\n[WARN] Postgresql Error during execute statement \n\tArgs: {str(e.args)}")
             statement = ""
 
-conn = psycopg2.connect(
-    database="tpcds",
-    host="127.0.0.1",
-    user="postgres",
-    password="postgres",
-    port="9700"
-)
-cursor = conn.cursor()
 exec_sql(cursor, "tpcds-citus.sql")

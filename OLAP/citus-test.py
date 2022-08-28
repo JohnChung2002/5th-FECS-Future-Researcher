@@ -37,8 +37,8 @@ def etl_test(conn, cursor):
     start_time = time.time()
     for table in TABLES:
         print(f"[Info] Inserting {table}")
-        os.system(f"sudo -u postgres psql -p 9700 -d tpcds -c \"\COPY {table} FROM '/tmp/{table}.dat' WITH DELIMITER AS '|' NULL AS '';\"")
-    os.system(f"sudo -u postgres psql -p 9700 -d tpcds -c 'VACUUM VERBOSE ANALYZE;'")
+        os.system(f"sudo -u postgres psql -p 9700 -c \"\COPY {table} FROM '/tmp/{table}.dat' WITH DELIMITER AS '|' NULL AS '';\"")
+    os.system(f"sudo -u postgres psql -p 9700 -c 'VACUUM VERBOSE ANALYZE;'")
     end_time = time.time()
     return (end_time - start_time)
 
@@ -49,7 +49,6 @@ def write_results(name, results):
 
 def test_citus():
     conn = psycopg2.connect(
-        database="tpcds",
         host="127.0.0.1",
         user="postgres",
         password="postgres",
