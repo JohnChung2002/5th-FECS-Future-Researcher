@@ -20,7 +20,7 @@ def exec_sql(cursor, sql_file):
                 start_time = time.time()
                 print(f"\n[INFO] Executing SQL script file: {sql_file}")
                 cursor.execute(statement)
-                cursor.fetchall()
+                temp = cursor.fetchall()
                 end_time = time.time()
                 return (end_time - start_time)
             except mysql.connector.Error as e:
