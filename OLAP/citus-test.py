@@ -4,6 +4,7 @@ import os
 import regex as re
 
 TABLES = ["dbgen_version", "customer_address", "customer_demographics", "date_dim", "warehouse", "ship_mode", "time_dim", "reason", "income_band", "item", "store", "call_center", "customer", "web_site", "store_returns", "household_demographics", "web_page", "promotion", "catalog_page", "inventory", "catalog_returns", "web_returns", "web_sales", "catalog_sales", "store_sales"]
+SKIP = [1]
 
 def exec_sql(cursor, sql_file):
     statement = ""
@@ -21,9 +22,9 @@ def exec_sql(cursor, sql_file):
                 cursor.execute(statement)
                 end_time = time.time()
                 return (end_time - start_time)
-            except psycopg2.errors as e:
+            except psycopg2.Error as e:
                 print(f"\n[WARN] Postgresql Error during execute statement \n\tArgs: {str(e.args)}")
-            statement = ""
+                return 0
 
 def time_convert(sec):
     mins = sec // 60
@@ -59,6 +60,9 @@ def test_citus():
     time_taken["ETL"] = etl_test(conn, cursor)
     print(f"Time Lapsed H:M:S={time_convert(time_taken['ETL'])}")
     for i in range(1,100):
+        if (i in SKIP):
+            time_taken[f"{i}"] = 0
+            continue
         sql_file = f"queries/Postgresql/query{i}.sql"
         time_taken[f"{i}"] = exec_sql(cursor, sql_file)
         print(f"Time Lapsed H:M:S={time_convert(time_taken[f'{i}'])}")
