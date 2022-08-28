@@ -1,5 +1,5 @@
-import psycopg2
 import os
+import regex as re
 
 def exec_sql(sql_file):
     statement = ""
@@ -11,10 +11,7 @@ def exec_sql(sql_file):
         else:  # when you get a line ending in ';' then exec statement and reset for next statement
             statement = statement + line
             #print "\n\n[DEBUG] Executing SQL statement:\n%s" % (statement)
-            try:
-                os.system(f"sudo -u postgres psql -p 9700 -c \"{statement}\"")
-            except psycopg2.Error as e:
-                print(f"\n[WARN] Postgresql Error during execute statement \n\tArgs: {str(e.args)}")
+            os.system(f"sudo -u postgres psql -p 9700 -c \"{statement}\"")
             statement = ""
 
-exec_sql(cursor, "tpcds-citus.sql")
+exec_sql("tpcds-citus.sql")
