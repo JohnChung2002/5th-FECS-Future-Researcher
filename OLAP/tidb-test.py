@@ -4,6 +4,7 @@ import os
 import regex as re
 
 TABLES = ["dbgen_version", "customer_address", "customer_demographics", "date_dim", "warehouse", "ship_mode", "time_dim", "reason", "income_band", "item", "store", "call_center", "customer", "web_site", "store_returns", "household_demographics", "web_page", "promotion", "catalog_page", "inventory", "catalog_returns", "web_returns", "web_sales", "catalog_sales", "store_sales"]
+SKIP = [5, 8, 9, 14, 18, 22, 23, 24, 27, 36, 38, 44, 45, 66, 67, 70, 77, 80, 84, 86, 87]
 
 def exec_sql(cursor, sql_file):
     statement = ""
@@ -42,6 +43,7 @@ def etl_test(conn, cursor):
         os.system(f"sudo mysql --host 127.0.0.1 --port 4000 -u root -proot -D tpcds --local-infile=1 -e \"LOAD DATA LOCAL INFILE '/var/lib/mysql-files/{table}.dat' INTO TABLE {table} COLUMNS TERMINATED BY '|' LINES TERMINATED BY '\n';\"")
         cursor.execute(f"ALTER TABLE {table} SET TIFLASH REPLICA 1;")
         conn.commit()
+    cursor.execute(f"SELECT * FROM information_schema.tiflash_replica;")
     end_time = time.time()
     return (end_time - start_time)
 
@@ -63,6 +65,9 @@ def test_tidb():
     time_taken["ETL"] = etl_test(conn, cursor)
     print(f"Time Lapsed H:M:S={time_convert(time_taken['ETL'])}")
     for i in range(1,100):
+        if (i in SKIP):
+            time_taken[f"{i}"] = 0
+            continue
         sql_file = f"queries/MySQL/query{i}.sql"
         time_taken[f"{i}"] = exec_sql(cursor, sql_file)
         print(f"Time Lapsed H:M:S={time_convert(time_taken[f'{i}'])}")
