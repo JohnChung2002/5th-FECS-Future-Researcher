@@ -61,7 +61,7 @@ def test_tidb():
         database="tpcds"
     )
     time_taken = {}
-    cursor = conn.cursor()
+    cursor = conn.cursor(buffered=True)
     time_taken["ETL"] = etl_test(conn, cursor)
     print(f"Time Lapsed H:M:S={time_convert(time_taken['ETL'])}")
     for i in range(1,100):
