@@ -4,7 +4,7 @@ import os
 import regex as re
 
 TABLES = ["dbgen_version", "customer_address", "customer_demographics", "date_dim", "warehouse", "ship_mode", "time_dim", "reason", "income_band", "item", "store", "call_center", "customer", "web_site", "store_returns", "household_demographics", "web_page", "promotion", "catalog_page", "inventory", "catalog_returns", "web_returns", "web_sales", "catalog_sales", "store_sales"]
-SKIP = [1, 4, 6, 50]
+SKIP = [1, 4, 6, 50, 74]
 
 def exec_sql(cursor, sql_file):
     statement = ""
