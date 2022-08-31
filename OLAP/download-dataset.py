@@ -15,7 +15,7 @@ def menu(num, option):
 
 def download(choice1, choice2):
     for filename in GDRIVE[choice1]:
-        os.system(f"curl -b 'cookies.txt' -L 'https://drive.google.com/uc?id={GDRIVE[choice1][filename]}&export=download&confirm=yes' -o {DPATH[choice2]}/{filename}")
+        os.system(f"curl -b '/notebooks/cookies.txt' -L 'https://drive.google.com/uc?id={GDRIVE[choice1][filename]}&export=download&confirm=yes' -o {DPATH[choice2]}/{filename}")
 
 if __name__ == "__main__":
     option = [{1:"10GB", 2:"30GB", 3:"100GB"}, {1:"Normal", 2:"MySQL"}]
