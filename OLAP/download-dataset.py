@@ -21,9 +21,9 @@ def download(choice1, choice2):
 if __name__ == "__main__":
     option = [{1:"10GB", 2:"30GB", 3:"100GB"}, {1:"Normal", 2:"MySQL"}]
     choice = [0,0]
-    if (len(sys.argv) == 2):
-        choice[0] = sys.argv[0]
-        choice[1] = sys.argv[1]
+    if (len(sys.argv) == 3):
+        choice[0] = sys.argv[1]
+        choice[1] = sys.argv[2]
     else:
         for i in range(2):
             choice[i] = menu(option[i])
