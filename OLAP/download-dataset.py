@@ -6,7 +6,7 @@ GDRIVE = { 1 : {'call_center.dat': '1UuvZttJ4unZvzbOrBKCJusw8_dreBCzV', 'catalog
 
 DPATH = {1: "/tmp", 2: "/var/lib/mysql-files"}
 
-def menu(num, option):
+def menu(option):
     for key in option:
         print(f"{key}. {option[key]}")
     choice = int(input("Select an option: "))
@@ -22,16 +22,14 @@ if __name__ == "__main__":
     option = [{1:"10GB", 2:"30GB", 3:"100GB"}, {1:"Normal", 2:"MySQL"}]
     choice = [0,0]
     if (len(sys.argv) == 2):
-        if (sys.argv[0] in option[0].keys() and sys.argv[1] in option[1].keys()):
-            download(sys.argv[0], sys.argv[1])
-        else:
-            print("Invalid selection. Exiting...")
+        choice[0] = sys.argv[0]
+        choice[1] = sys.argv[1]
     else:
         for i in range(2):
-            choice[i] = menu(i, option[i])
+            choice[i] = menu(option[i])
             if choice[i] not in option[i].keys():
                 break
-        if (choice[0] in option[0].keys() and choice[1] in option[1].keys()):
-            download(choice[0], choice[1])
-        else:
-            print("Invalid selection. Exiting...")
+    if (choice[0] in option[0].keys() and choice[1] in option[1].keys()):
+        download(choice[0], choice[1])
+    else:
+        print("Invalid selection. Exiting...")

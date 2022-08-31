@@ -2,9 +2,10 @@ import time
 import psycopg2
 import os
 import regex as re
+import sys
 
 TABLES = ["dbgen_version", "customer_address", "customer_demographics", "date_dim", "warehouse", "ship_mode", "time_dim", "reason", "income_band", "item", "store", "call_center", "customer", "web_site", "store_returns", "household_demographics", "web_page", "promotion", "catalog_page", "inventory", "catalog_returns", "web_returns", "web_sales", "catalog_sales", "store_sales"]
-SKIP = [1, 4, 6, 50, 74]
+SKIP = [[1, 4, 6, 50, 74], [1, 4, 6, 14, 50, 74], [1, 4, 6, 50, 74]]
 
 def exec_sql(cursor, sql_file):
     statement = ""
@@ -33,7 +34,7 @@ def time_convert(sec):
     mins = mins % 60
     return ("{0}:{1}:{2}".format(int(hours),int(mins),sec))
 
-def etl_test(conn, cursor):
+def etl_test():
     #Load data (ETL) 
     start_time = time.time()
     for table in TABLES:
@@ -48,7 +49,7 @@ def write_results(name, results):
         for key in results:
             f.write(f"Time taken for {key} query: {time_convert(results[key])}\n")
 
-def test_citus():
+def test_citus(choice):
     conn = psycopg2.connect(
         host="127.0.0.1",
         user="postgres",
@@ -57,10 +58,10 @@ def test_citus():
     )
     time_taken = {}
     cursor = conn.cursor()
-    time_taken["ETL"] = etl_test(conn, cursor)
+    time_taken["ETL"] = etl_test()
     print(f"Time Lapsed H:M:S={time_convert(time_taken['ETL'])}")
     for i in range(1,100):
-        if (i in SKIP):
+        if (i in SKIP[choice]):
             time_taken[f"{i}"] = 0
             continue
         sql_file = f"queries/Postgresql/query{i}.sql"
@@ -71,11 +72,14 @@ def test_citus():
 if __name__ == "__main__":
     option = {1 : "10GB", 2 : "30GB", 3 : "100GB"}
     print("---Citus TPC-DS Test---")
-    for key in option:
-        print(f"{key}. {option[key]}")
-    choice = int(input("Select an option: "))
+    if (len(sys.argv == 1)):
+        choice = sys.argv[0]
+    else:
+        for key in option:
+            print(f"{key}. {option[key]}")
+        choice = int(input("Select an option: "))
     if choice in option.keys():
-        results = test_citus()
+        results = test_citus(choice)
         write_results(option[choice], results)
     else:
         print("Invalid selection. Exiting...")
