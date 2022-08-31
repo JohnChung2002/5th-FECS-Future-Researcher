@@ -73,7 +73,7 @@ if __name__ == "__main__":
     option = {1 : "10GB", 2 : "30GB", 3 : "100GB"}
     print("---Citus TPC-DS Test---")
     if (len(sys.argv) == 2):
-        choice = sys.argv[1]
+        choice = int(sys.argv[1])
     else:
         for key in option:
             print(f"{key}. {option[key]}")
