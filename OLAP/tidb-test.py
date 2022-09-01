@@ -2,6 +2,7 @@ import time
 import mysql.connector
 import os
 import regex as re
+import sys
 
 TABLES = ["dbgen_version", "customer_address", "customer_demographics", "date_dim", "warehouse", "ship_mode", "time_dim", "reason", "income_band", "item", "store", "call_center", "customer", "web_site", "store_returns", "household_demographics", "web_page", "promotion", "catalog_page", "inventory", "catalog_returns", "web_returns", "web_sales", "catalog_sales", "store_sales"]
 SKIP = [5, 8, 9, 14, 18, 22, 23, 24, 27, 36, 38, 44, 45, 66, 67, 70, 77, 80, 84, 86, 87, 78]
@@ -77,9 +78,12 @@ def test_tidb():
 if __name__ == "__main__":
     option = {1 : "10GB", 2 : "30GB", 3 : "100GB"}
     print("---TiDB TPC-DS Test---")
-    for key in option:
-        print(f"{key}. {option[key]}")
-    choice = int(input("Select an option: "))
+    if (len(sys.argv) == 2):
+        choice = int(sys.argv[1])
+    else:
+        for key in option:
+            print(f"{key}. {option[key]}")
+        choice = int(input("Select an option: "))
     if choice in option.keys():
         results = test_tidb()
         write_results(option[choice], results)

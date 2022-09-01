@@ -2,8 +2,10 @@ import time
 import psycopg2
 import os
 import regex as re
+import sys
 
 TABLES = ["dbgen_version", "customer_address", "customer_demographics", "date_dim", "warehouse", "ship_mode", "time_dim", "reason", "income_band", "item", "store", "call_center", "customer", "web_site", "store_returns", "household_demographics", "web_page", "promotion", "catalog_page", "inventory", "catalog_returns", "web_returns", "web_sales", "catalog_sales", "store_sales"]
+SKIP = [[1, 4, 6, 50, 74], [1, 4, 6, 14, 50, 74], [1, 4, 6, 50, 74]]
 
 def exec_sql(cursor, sql_file):
     statement = ""
@@ -60,6 +62,9 @@ def test_postgresql():
     time_taken["ETL"] = etl_test(conn, cursor)
     print(f"Time Lapsed H:M:S={time_convert(time_taken['ETL'])}")
     for i in range(1,100):
+        if (i in SKIP[choice]):
+            time_taken[f"{i}"] = 0
+            continue
         sql_file = f"queries/Postgresql/query{i}.sql"
         time_taken[f"{i}"] = exec_sql(cursor, sql_file)
         print(f"Time Lapsed H:M:S={time_convert(time_taken[f'{i}'])}")
@@ -68,9 +73,12 @@ def test_postgresql():
 if __name__ == "__main__":
     option = {1 : "10GB", 2 : "30GB", 3 : "100GB"}
     print("---Postgresql TPC-DS Test---")
-    for key in option:
-        print(f"{key}. {option[key]}")
-    choice = int(input("Select an option: "))
+    if (len(sys.argv) == 2):
+        choice = int(sys.argv[1])
+    else:
+        for key in option:
+            print(f"{key}. {option[key]}")
+        choice = int(input("Select an option: "))
     if choice in option.keys():
         results = test_postgresql()
         write_results(option[choice], results)
