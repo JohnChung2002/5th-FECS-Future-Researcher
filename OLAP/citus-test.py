@@ -61,7 +61,7 @@ def test_citus(choice):
     time_taken["ETL"] = etl_test()
     print(f"Time Lapsed H:M:S={time_convert(time_taken['ETL'])}")
     for i in range(1,100):
-        if (i in SKIP[choice]):
+        if (i in SKIP[choice-1]):
             time_taken[f"{i}"] = 0
             continue
         sql_file = f"queries/Postgresql/query{i}.sql"
